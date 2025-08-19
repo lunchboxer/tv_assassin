@@ -8,7 +8,7 @@ class SkullIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Icon(
-      Icons.tv_off, // Using tv_off as it's more relevant to our app
+      Icons.skull,
       size: size,
     );
   }

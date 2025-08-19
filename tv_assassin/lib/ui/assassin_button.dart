@@ -89,7 +89,7 @@ class _AssassinButtonState extends State<AssassinButton>
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  SkullIcon(size: 48.0),
+                  const SkullIcon(size: 48.0),
                   const SizedBox(height: 8),
                   const Text(
                     'Kill TVs',
