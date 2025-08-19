@@ -48,6 +48,16 @@ jobs:
           base64 -di keystore.base64 > android/app/upload-keystore.jks
           chmod 644 android/app/upload-keystore.jks
 
+      - name: Verify Keystore
+        run: |
+          keytool -list -v -keystore android/app/upload-keystore.jks \
+            -storepass "${{ secrets.KEYSTORE_PASSWORD }}" \
+            -alias "${{ secrets.KEY_ALIAS }}" \
+            -keypass "${{ secrets.KEY_PASSWORD }}" || echo "Verification failed"
+        shell: bash
+        env:
+          KEYTOOL_OPTS: -Dkeystore.password=${{ secrets.KEYSTORE_PASSWORD }} -Dkey.password=${{ secrets.KEY_PASSWORD }}
+
       - name: Build Split APKs
         env:
           KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
