@@ -45,7 +45,13 @@ android {
             storePassword = keystoreProperties["storePassword"]?.toString() ?: System.getenv("KEYSTORE_PASSWORD") ?: ""
             
             // For storeFile, in CI/CD we use the path to the decoded keystore
-            val storeFilePath = keystoreProperties["storeFile"]?.toString() ?: "android/app/upload-keystore.jks"
+            // In CI, the file is at android/app/upload-keystore.jks
+            // When using key.properties locally, we respect the storeFile property
+            val storeFilePath = if (keystoreProperties.containsKey("storeFile")) {
+                keystoreProperties["storeFile"]?.toString() ?: "upload-keystore.jks"
+            } else {
+                "upload-keystore.jks"
+            }
             storeFile = file(storeFilePath)
         }
     }
