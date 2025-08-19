@@ -22,10 +22,10 @@ class MockIRService implements IRService {
     if (_shouldThrowOnTransmission) {
       throw Exception('Transmission failed');
     }
-    
+
     _lastTransmittedCodes = List<int>.from(codes);
     _transmitCallCount++;
-    
+
     // Simulate transmission delay if set
     if (_transmitDelay > Duration.zero) {
       await Future.delayed(_transmitDelay);
