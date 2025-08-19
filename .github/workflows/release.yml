@@ -52,7 +52,7 @@ jobs:
           KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
         run: |
           flutter build apk --split-per-abi --release
-          bash android/rename-apks.sh
+          bash android/rename_apks.sh
 
       - name: Verify renamed APKs
         run: |
