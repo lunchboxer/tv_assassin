@@ -3,7 +3,7 @@
     <uses-permission android:name="android.permission.TRANSMIT_IR" />
     
     <application
-        android:label="tv_assassin"
+        android:label="TV Assassin"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
