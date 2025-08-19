@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tv_assassin/ui/main_screen.dart';
+import 'package:tv_assassin/utils/security_utils.dart';
 import 'package:tv_assassin/viewmodel/main_view_model.dart';
 import 'package:tv_assassin/viewmodel/theme_manager.dart';
 
 void main() {
+  // Security check for release mode flags
+  SecurityUtils.checkReleaseModeFlags();
+
   runApp(const MyApp());
 }
 
