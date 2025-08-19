@@ -53,6 +53,7 @@ class MyHomePage extends StatelessWidget {
       onAssassinButtonPressed: viewModel.transmitAllShutdownCodes,
       onThemeTogglePressed: themeManager.toggleTheme,
       isTransmitting: viewModel.isTransmitting,
+      errorMessage: viewModel.errorMessage,
     );
   }
 }

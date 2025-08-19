@@ -84,6 +84,7 @@ class _AssassinButtonState extends State<AssassinButton>
                         context,
                       ).colorScheme.primary.withValues(alpha: 0.5)
                     : Theme.of(context).colorScheme.primary,
+                foregroundColor: Theme.of(context).colorScheme.onPrimary,
               ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
