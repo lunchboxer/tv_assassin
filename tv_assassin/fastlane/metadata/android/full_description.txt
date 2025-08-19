@@ -1,0 +1,10 @@
+# TV Assassin
+
+A minimalist Android application that enables users to send IR shutdown signals to multiple television brands using a single button interface.
+
+## Features
+- Single-button interface to power off nearby TVs
+- Supports 15+ major TV brands
+- Dark/Light theme support
+- No configuration required
+- Privacy focused - no data collection

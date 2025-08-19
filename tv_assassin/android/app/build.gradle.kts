@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.tv_assassin"
+    namespace = "io.github.lunchboxer.tv_assassin"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
 

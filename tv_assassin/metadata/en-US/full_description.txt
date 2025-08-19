@@ -1,0 +1,27 @@
+Categories:
+Utility
+
+License: GPL-3.0-only
+
+Author Name: TV Assassin Team
+
+Web Site: 
+
+Source Code: https://github.com/your-username/tv-assassin
+
+Issue Tracker: https://github.com/your-username/tv-assassin/issues
+
+Summary: Power off nearby TVs with one button
+
+Description:
+TV Assassin is a minimalist Android application that enables users to send IR
+shutdown signals to multiple television brands using a single button interface.
+
+Features:
+* Single-button interface to power off nearby TVs
+* Supports 15+ major TV brands
+* Dark/Light theme support
+* No configuration required
+* Privacy focused - no data collection
+
+Requires the TRANSMIT_IR permission to send infrared signals to TVs.
