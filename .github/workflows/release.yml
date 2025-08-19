@@ -29,17 +29,14 @@ jobs:
             ~/.gradle/caches
             ~/.gradle/wrapper
           key: gradle-${{ runner.os }}-${{ hashFiles('**/gradle-wrapper.properties', '**/build.gradle.kts') }}
-          
       - uses: actions/setup-java@v4
         with:
           java-version: '17'
           distribution: 'temurin'
-          
       - uses: subosito/flutter-action@v2
         with:
           flutter-version: '3.35.0'
           channel: 'stable'
-          
       - run: flutter pub get
       
       - name: Decode Keystore
@@ -53,7 +50,15 @@ jobs:
           KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
           KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
           KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
-        run: flutter build apk --split-per-abi --release && ./android/rename-apks.sh
+        run: |
+          flutter build apk --split-per-abi --release
+          bash android/rename-apks.sh
+
+      - name: Verify renamed APKs
+        run: |
+          ls -la build/app/outputs/flutter-apk/
+          echo "Renamed files:"
+          ls -la build/app/outputs/flutter-apk/tv_assassin-* || echo "No renamed files found"
 
       - name: Get Version
         id: version
