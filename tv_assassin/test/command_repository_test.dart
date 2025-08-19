@@ -42,5 +42,35 @@ void main() {
       // We expect at least 15 brands with at least 1 code each
       expect(allCodes.length, greaterThanOrEqualTo(15));
     });
+
+    test('should have valid code format', () {
+      final allCodes = repository.getAllShutdownCodes();
+      
+      // Verify all codes are valid 32-bit integers
+      for (final code in allCodes) {
+        // Check that code is not null
+        expect(code, isNotNull);
+        
+        // Check that code is a valid integer
+        expect(code, isA<int>());
+        
+        // Check that code is within 32-bit range (0 to 0xFFFFFFFF)
+        expect(code, greaterThanOrEqualTo(0));
+        expect(code, lessThanOrEqualTo(0xFFFFFFFF));
+        
+        // Check that code is not zero (which would be invalid)
+        expect(code, isNot(0));
+      }
+      
+      // Also verify a known code format for Samsung
+      final samsungCodes = repository.getCodesForBrand('Samsung');
+      expect(samsungCodes, isNotNull);
+      expect(samsungCodes!.isNotEmpty, isTrue);
+      
+      // Samsung codes should start with 0xE0E0 (common prefix for Samsung remotes)
+      final firstSamsungCode = samsungCodes[0];
+      final samsungPrefix = (firstSamsungCode >> 16) & 0xFFFF;
+      expect(samsungPrefix, 0xE0E0);
+    });
   });
 }
