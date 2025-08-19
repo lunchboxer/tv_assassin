@@ -64,11 +64,10 @@ jobs:
       - name: Rename APKs
         run: |
           TAG_VERSION=${GITHUB_REF#refs/tags/v}
-          cd build/app/outputs/flutter-apk
-          for file in app-*-release.apk; do
+          for file in build/app/outputs/flutter-apk/app-*-release.apk; do
             if [ -f "$file" ]; then
-              abi=$(echo "$file" | sed -E 's/app-([a-z0-9]+)-release\.apk/\1/')
-              new_name="../../../tv-assassin-v${TAG_VERSION}-${abi}.apk"
+              abi=$(echo "$file" | sed -E 's/build\/app\/outputs\/flutter-apk\/app-([a-z0-9]+)-release\.apk/\1/')
+              new_name="tv-assassin-v${TAG_VERSION}-${abi}.apk"
               mv "$file" "$new_name"
               echo "RENAMED_APK_$abi=$new_name" >> $GITHUB_ENV
             fi
