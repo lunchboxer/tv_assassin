@@ -53,7 +53,7 @@ jobs:
           KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
           KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
           KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
-        run: flutter build apk --split-per-abi --release
+        run: flutter build apk --split-per-abi --release && ./android/rename-apks.sh
 
       - name: Get Version
         id: version
@@ -61,26 +61,15 @@ jobs:
           TAG_VERSION=${GITHUB_REF#refs/tags/v}
           echo "RELEASE_TAG=v${TAG_VERSION}" >> $GITHUB_ENV
 
-      - name: Rename APKs
-        run: |
-          TAG_VERSION=${GITHUB_REF#refs/tags/v}
-          for file in build/app/outputs/flutter-apk/app-*-release.apk; do
-            if [ -f "$file" ]; then
-              abi=$(echo "$file" | sed -E 's/app-([a-z0-9]+)-release\.apk/\1/')
-              new_name="tv-assassin-v${TAG_VERSION}-${abi}.apk"
-              mv "$file" "$new_name"
-            fi
-          done
-
       # Upload all APKs as workflow artifacts
       - name: Upload APK Artifacts
         uses: actions/upload-artifact@v4
         with:
           name: tv-assassin-apks
           path: |
-            tv-assassin-v*-armeabi-v7a.apk
-            tv-assassin-v*-arm64-v8a.apk
-            tv-assassin-v*-x86_64.apk
+            build/app/outputs/flutter-apk/tv_assassin-armeabi-v7a-v*.apk
+            build/app/outputs/flutter-apk/tv_assassin-arm64-v8a-v*.apk
+            build/app/outputs/flutter-apk/tv_assassin-x86_64-v*.apk
           retention-days: 1
 
       - name: Create Release
@@ -94,6 +83,6 @@ jobs:
           draft: false
           prerelease: false
           files: |
-            tv-assassin-v*-armeabi-v7a.apk
-            tv-assassin-v*-arm64-v8a.apk
-            tv-assassin-v*-x86_64.apk
+            build/app/outputs/flutter-apk/tv_assassin-armeabi-v7a-v*.apk
+            build/app/outputs/flutter-apk/tv_assassin-arm64-v8a-v*.apk
+            build/app/outputs/flutter-apk/tv_assassin-x86_64-v*.apk
