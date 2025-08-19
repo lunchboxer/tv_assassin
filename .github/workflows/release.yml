@@ -68,13 +68,11 @@ jobs:
           for file in app-*-release.apk; do
             if [ -f "$file" ]; then
               abi=$(echo "$file" | sed -E 's/app-([a-z0-9]+)-release\.apk/\1/')
-              new_name="../tv-assassin-v${TAG_VERSION}-${abi}.apk"
+              new_name="../../../tv-assassin-v${TAG_VERSION}-${abi}.apk"
               mv "$file" "$new_name"
               echo "RENAMED_APK_$abi=$new_name" >> $GITHUB_ENV
             fi
           done
-          cd ../..
-          ls -la build/app/outputs/
 
       # Upload all APKs as workflow artifacts
       - name: Upload APK Artifacts
@@ -82,9 +80,9 @@ jobs:
         with:
           name: tv-assassin-apks
           path: |
-            build/app/outputs/tv-assassin-v*-armeabi-v7a.apk
-            build/app/outputs/tv-assassin-v*-arm64-v8a.apk
-            build/app/outputs/tv-assassin-v*-x86_64.apk
+            tv-assassin-v*-armeabi-v7a.apk
+            tv-assassin-v*-arm64-v8a.apk
+            tv-assassin-v*-x86_64.apk
           retention-days: 1
 
       - name: Create Release
@@ -98,6 +96,6 @@ jobs:
           draft: false
           prerelease: false
           files: |
-            build/app/outputs/tv-assassin-v*-armeabi-v7a.apk
-            build/app/outputs/tv-assassin-v*-arm64-v8a.apk
-            build/app/outputs/tv-assassin-v*-x86_64.apk
+            tv-assassin-v*-armeabi-v7a.apk
+            tv-assassin-v*-arm64-v8a.apk
+            tv-assassin-v*-x86_64.apk
