@@ -86,4 +86,3 @@ app.*.map.json
 # Backup files
 *~
 notes.md
-job-logs.txt
