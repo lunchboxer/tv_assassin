@@ -1,4 +1,4 @@
-package com.example.tv_assassin
+package io.github.lunchboxer.tv_assassin
 
 import io.flutter.embedding.android.FlutterActivity
 
