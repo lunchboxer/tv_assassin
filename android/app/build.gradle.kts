@@ -39,10 +39,14 @@ android {
     }
     signingConfigs {
         create("release") {
-            keyAlias = keystoreProperties["keyAlias"] as String
-            keyPassword = keystoreProperties["keyPassword"] as String
-            storeFile = keystoreProperties["storeFile"]?.let { file(it) }
-            storePassword = keystoreProperties["storePassword"] as String
+            // Use environment variables in CI/CD, otherwise use key.properties file
+            keyAlias = keystoreProperties["keyAlias"]?.toString() ?: System.getenv("KEY_ALIAS") ?: ""
+            keyPassword = keystoreProperties["keyPassword"]?.toString() ?: System.getenv("KEY_PASSWORD") ?: ""
+            storePassword = keystoreProperties["storePassword"]?.toString() ?: System.getenv("KEYSTORE_PASSWORD") ?: ""
+            
+            // For storeFile, in CI/CD we use the path to the decoded keystore
+            val storeFilePath = keystoreProperties["storeFile"]?.toString() ?: "android/app/upload-keystore.jks"
+            storeFile = file(storeFilePath)
         }
     }
 
