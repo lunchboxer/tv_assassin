@@ -29,11 +29,11 @@ class MyApp extends StatelessWidget {
           return MaterialApp(
             title: 'TV Assassin',
             theme: ThemeData(
-              primarySwatch: Colors.deepPurple,
+              primarySwatch: Colors.purple,
               brightness: Brightness.light,
             ),
             darkTheme: ThemeData(
-              primarySwatch: Colors.amber,
+              primarySwatch: Colors.purple,
               brightness: Brightness.dark,
             ),
             themeMode: themeManager.currentTheme,
